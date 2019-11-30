@@ -1,0 +1,43 @@
+type Query {
+  userList: [User!]!
+  postList: [Post!]!
+}
+
+type Mutation {
+  signup(email: String!, password: String!, name: String!): AutoPayLoad
+  login(email: String!, password: String!): AutoPayLoad
+  createPost(url: String!, desciption: String!): Post!
+  updatePost(url: String!, desciption: String!, id: ID!): Post!
+  deletePost(id: ID!): Post!
+}
+
+type Subscription {
+  newPost: PostAutoPayLoad
+}
+
+type AutoPayLoad {
+  token: String
+  user: User
+}
+type PostAutoPayLoad {
+  mutation: String
+  node: Post
+  updatedFields: [String]
+  previousValues: Post
+}
+type Post {
+  id: ID!
+  desciption: String!
+  url: String!
+  createdAt: String!
+  updatedAt: String!
+  postedBy: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  createdAt: String
+}
